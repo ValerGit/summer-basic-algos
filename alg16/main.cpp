@@ -34,8 +34,7 @@ public:
     void preSeq(Node*);
     void postSeq(Node*);
     void levSeq(Node*, int);
-    void height(Node*, int curr);
-    int element(Node*,int curr, int toFind);
+    int findMe(Node*, int);
     Node* head;
 //private:
     void deleting(Node*);
@@ -67,12 +66,20 @@ Node* BST::addElement(Node* root, int toAdd)
 {
     if(head == 0)
     {
-        head = new Node(toAdd);
+        Node* temp = new Node(toAdd);
+        temp->subNodes = 0;
+        head = temp;
         return 0;
     }
-    if(root == 0) return new Node(toAdd);
+    if(root == 0)
+    {
+        Node* temp = new Node(toAdd);
+        temp->subNodes = 0;
+        return temp;
+    }
     if(root->value <= toAdd) root->right = addElement(root->right, toAdd);
     else root->left = addElement (root->left, toAdd);
+    root->subNodes +=1;
     return root;
 }
 
@@ -104,7 +111,7 @@ void BST::levSeq(Node* root, int num)
 {
     for(int i = 0; i < num; ++i)
     {
-        cout << root[i].value << " ";
+        cout << root[i].value << " " <<root[i].subNodes << endl;
     }
     int iter = 0;
     Node* arr = new Node[num*2];
@@ -129,24 +136,14 @@ void BST::levSeq(Node* root, int num)
     delete[] arr;
 }
 
-void BST::height(Node* root, int curr)
+int BST::findMe(Node* root, int num)
 {
-    if(root == 0) return;
-    hight = ++curr;
-    height(root->left, curr);
-    hight = ++curr;
-    height(root->right, curr);
-    if(curr > hight) hight = curr;
-}
-
-int BST::element(Node* root, int curr, int toFind)
-{
-    if(root == 0) return 0;
-    if(toFind == curr) return root->value;
-    element(root->left, curr, toFind);
-    hight = ++curr;
-    element(root->right, curr, toFind);
-    if(curr > hight) hight = curr;
+    if(num < 0 || num > root->subNodes) return -1;
+    if(root->left == 0 || root->left->subNodes + 1 == num)
+        return root->value;
+    if(root->left->subNodes < num)
+        return findMe(root->right, (num - root->left->subNodes - 2));
+    else return findMe(root->left, num);
 }
 
 int main()
@@ -158,9 +155,7 @@ int main()
         mine.addElement(mine.head, arr[i]);
     }
     mine.levSeq(mine.head, 1);
-//    cout << endl;
-//    mine.height(mine.head,0);
-//    cout << mine.hight << endl;
+    cout << mine.findMe(mine.head, 2);
     return 0;
 }
 
