@@ -31,13 +31,12 @@ public:
         addElement(head, x);
     }
     int getHeight(){
-        calcHeight(head);
-        return height;
+        return calcHeight(head);
     }
 private:
     void deleting(NodeBST*);
     NodeBST* addElement(NodeBST* , int );
-    void calcHeight(NodeBST* );
+    int calcHeight(NodeBST* );
     NodeBST* head = 0;
     int height = 0;
 };

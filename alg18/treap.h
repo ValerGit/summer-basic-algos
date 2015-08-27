@@ -26,15 +26,14 @@ public:
         print(head);
     }
     int getHeight(){
-        calcHeight(head);
-        return height;
+        return calcHeight(head);
     }
 private:
     Node* head = 0;
     int height = 0;
     void merzh(Node*& T,Node* L, Node* R);
     void split(Node* T, int key, Node *&L, Node *&R);
-    void calcHeight(Node*);
+    int calcHeight(Node*);
     void print(Node*);
     void deleting(Node*);
 };

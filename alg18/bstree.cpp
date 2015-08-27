@@ -30,17 +30,8 @@ NodeBST* BSTree::addElement(NodeBST* root, int toAdd)
     return root;
 }
 
-void BSTree::calcHeight(NodeBST* root)
+int BSTree::calcHeight(NodeBST* root)
 {
-    if(root == 0) return;
-    calcHeight(root->left);
-    calcHeight(root->right);
-    if(root->left && root->right)
-        root->height = 1 + max(root->left->height, root->right->height);
-    else{
-        if(root->left) root->height = 1 + root->left->height;
-        else if(root->right) root->height = 1 + root->right->height;
-        else root->height = 1;
-    }
-    height = root->height;
+    if(root == 0) return 0;
+    return 1 + max(calcHeight(root->left), calcHeight(root->right));
 }

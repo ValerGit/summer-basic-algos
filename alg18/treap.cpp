@@ -5,7 +5,7 @@ void Treap::split(Node *T, int key, Node*& L, Node*& R){
         L = R = 0;
         return;
     }
-    if(T->key < key){
+    if(T->key < key) {
         split(T->right, key, T->right, R);
         L = T;
     } else {
@@ -14,7 +14,7 @@ void Treap::split(Node *T, int key, Node*& L, Node*& R){
     }
 }
 
-void Treap::merzh(Node*& T,Node *L, Node *R){
+void Treap::merzh(Node*& T, Node *L, Node *R){
     if(L == 0 || R == 0){
         if(L != 0) T = L;
         else T = R;
@@ -49,18 +49,9 @@ void Treap::print(Node* root){
     print(root->right);
 }
 
-void Treap::calcHeight(Node* root){
-    if(root == 0) return;
-    calcHeight(root->left);
-    calcHeight(root->right);
-    if(root->left && root->right)
-        root->subHeight = 1 + (max(root->left->subHeight, root->right->subHeight));
-    else{
-        if(root->left) root->subHeight = 1 + root->left->subHeight;
-        else if(root->right) root->subHeight = 1 + root->right->subHeight;
-        else root->subHeight = 1;
-    }
-    height = root->subHeight;
+int Treap::calcHeight(Node* root){
+    if(root == 0) return 0;
+     return 1 + max(calcHeight(root->left), calcHeight(root->right));
 }
 
 void Treap::deleting(Node* root){

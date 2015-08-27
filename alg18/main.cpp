@@ -14,7 +14,8 @@ int main()
         one.addElement(arrX[i], arrY[i]);
         two.adding(arrX[i]);
     }
-    cout << two.getHeight() - one.getHeight();
+    cout << one.getHeight() << endl;
+    cout << two.getHeight() << endl;
     return 0;
 }
 
