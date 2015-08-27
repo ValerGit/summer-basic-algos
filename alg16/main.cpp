@@ -148,14 +148,14 @@ int BST::findMe(Node* root, int num)
 
 int main()
 {
-    int arr[9] = {4, 7, 14, 6, 1, 3, 13, 10, 8};
+    int arr[13] = {12, 24, 30, 16, 45, 15, 20, 6, 8, 4, 7, 10, 9};
     BST mine;
-    for(int i = 0; i < 9; ++i)
+    for(int i = 0; i < 13; ++i)
     {
         mine.addElement(mine.head, arr[i]);
     }
     mine.levSeq(mine.head, 1);
-    cout << mine.findMe(mine.head, 2);
+    cout << mine.findMe(mine.head, 8);
     return 0;
 }
 
